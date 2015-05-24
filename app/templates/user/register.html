@@ -1,0 +1,19 @@
+<br action="" ng-controller="authenticationController" ng-submit="register()">
+
+    <label for="username">Username</label>
+    <input ng-model="registerData.username" type="text" placeholder="username" id="username"/><br/>
+    <label for="password">Password</label>
+    <input ng-model="registerData.password" placeholder="password" type="text" id="password"/><br/>
+    <label for="confirmPassword">Confirm Password</label>
+    <input ng-model="registerData.confirmPassword" type="text" placeholder="confirm password" id="confirmPassword"/><br/>
+    <label for="fullName">Name</label>
+    <input ng-model="registerData.name" placeholder="full name" type="text" id="fullName"/><br/>
+    <label for="male">male</label>
+    <input ng-model="registerData.gender" type="radio" name="gender" id="male" value="male"/>
+    <label for="female">female</label>
+    <input ng-model="registerData.gender" type="radio" name="gender" id="female" value="female"/>
+    <label for="other">other</label>
+    <input ng-model="registerData.gender" type="radio" name="gender" id="other" value="other"/><br/>
+    <input type="submit" value="Register"/>
+
+</form>

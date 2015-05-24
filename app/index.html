@@ -1,10 +1,29 @@
 <!DOCTYPE html>
-<html>
+<html ng-app="socialNetwork">
 <head lang="en">
     <meta charset="UTF-8">
     <title>social-network</title>
+    <link rel="stylesheet" href="styles/socialNetwork.css"/>
+    <link rel="stylesheet" href="styles/bootstrap.css"/>
+    <link rel="stylesheet" href="styles/bootstrap-theme.css"/>
 </head>
 <body>
-    <div ng-view></div>
+
+<div ng-view></div>
+
+<script src="lib/angular/angular.js"></script>
+<script src="lib/angular/angular-route.js"></script>
+<script src="lib/jquery/jquery.js"></script>
+<script src="lib/bootstrap/bootstrap.js"></script>
+<script src="lib/jquery.noty/jquery.noty.js"></script>
+
+<script src="scripts/app.js"></script>
+
+<script src="scripts/controllers/welcomeController.js"></script>
+<script src="scripts/controllers/loginController.js"></script>
+
+<script src="scripts/directives/login.js"></script>
+
+<script src="scripts/services/authentication.js"></script>
 </body>
 </html>
