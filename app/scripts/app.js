@@ -1,25 +1,27 @@
-var app = angular.module('socialNetwork', ['ngRoute']);
+var app = angular.module('socialNetwork', ['ngRoute', 'ngResource', 'LocalStorageModule']);
 
-app.config(['$routeProvider', function($routeProvider) {
+app.constant('baseServiceUrl', 'http://softuni-social-network.azurewebsites.net/api/');
 
-        $routeProvider.when('/', {
-                templateUrl: 'templates/welcome.html',
-                controller: 'WelcomeController'
-            });
+app.config(['$routeProvider', function ($routeProvider) {
 
-        $routeProvider.when('/login', {
-                templateUrl: 'templates/login.html',
-                controller: 'LoginController'
-            });
+    $routeProvider.when('/', {
+        templateUrl: 'templates/welcome.html',
+        controller: 'WelcomeController'
+    });
+
+    $routeProvider.when('/login', {
+        templateUrl: 'templates/login.html',
+        controller: 'LoginController'
+    });
 
     $routeProvider.when('/register', {
         templateUrl: 'templates/register.html',
         controller: 'RegisterController'
     });
 
-        $routeProvider.otherwise({
-                redirectTo: '/'
-            });
-    }]);
+    $routeProvider.otherwise({
+        redirectTo: '/'
+    });
 
-app.constant('baseServiceUrl', 'http://softuni-social-network.azurewebsites.net/api/');
+}]);
+
