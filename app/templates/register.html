@@ -1,0 +1,53 @@
+<div class="row" >
+    <div class="col-md-6">
+        <div class="center-block" id="login">
+            <img id="login-register-img" src="img/Social-Network-Stock-Photo.jpg" alt="Social Network logo"
+                 class="center-block"/>
+        </div>
+    </div>
+    <div class="col-md-4" id="register-form">
+        <form class="forms" name="registerForm">
+            <div class="form-group" ng-class="{ 'has-error' : registerForm.username.$invalid && !registerForm.username.$pristine }">
+                <label>Username:</label>
+                <input type="text" name="username" class="form-control input-sm" ng-model="user.username" required>
+                <p ng-show="registerForm.username.$invalid && !registerForm.username.$pristine" class="help-block">Username is missing.</p>
+            </div>
+
+            <div class="form-group" ng-class="{ 'has-error' : registerForm.password.$invalid && !registerForm.password.$pristine }">
+                <label>Password:</label>
+                <input type="password" required name="password" class="form-control input-sm" ng-model="user.password">
+                <p ng-show="registerForm.password.$invalid && !registerForm.password.$pristine" class="help-block">Password is missing.</p>
+            </div>
+
+            <div class="form-group" ng-class="{ 'has-error' : registerForm.confirmPassword.$invalid && !registerForm.confirmPassword.$pristine }">
+                <label>Confirm password:</label>
+                <input type="password" required name="confirmPassword" class="form-control input-sm" ng-model="user.confirmPassword">
+                <p ng-show="registerForm.confirmPassword.$invalid && !registerForm.confirmPassword.$pristine" class="help-block">Please, confirm the password.</p>
+            </div>
+
+            <div class="form-group" ng-class="{ 'has-error' : registerForm.name.$invalid && !registerForm.name.$pristine }">
+                <label>Name:</label>
+                <input type="text" name="name" class="form-control input-sm" ng-model="user.name" required>
+                <p ng-show="registerForm.name.$invalid && !registerForm.name.$pristine" class="help-block">Name is missing.</p>
+            </div>
+
+            <div class="form-group" ng-class="{ 'has-error' : registerForm.email.$invalid && !registerForm.email.$pristine }">
+                <label>Email:</label>
+                <input type="email" name="email" class="form-control input-sm" ng-model="user.email" required>
+                <p ng-show="registerForm.email.$invalid && !registerForm.email.$pristine" class="help-block">Invalid and/or missing email.</p>
+            </div>
+
+            <div class="form-group" ng-class="{ 'has-error' : registerForm.gender.$invalid && !registerForm.gender.$pristine }">
+                <label>Gender:</label>
+                <p>
+                    <input type="radio"  name="gender" value="male" ng-model="user.gender"> Male
+                    <input type="radio" name="gender" value="female" ng-model="user.gender"> Female
+                    <input type="radio" name="gender" value="other" ng-model="user.gender"> Other
+                </p>
+            </div>
+
+            <input type="submit" class="btn btn-primary" value="Register" ng-click="register(user, registerForm)"/>
+            <button class="btn btn-group" ng-click="cancelRegister()">Cancel</button>
+        </form>
+    </div>
+</div>

@@ -1,24 +1,25 @@
-var socialNetwork = angular.module('socialNetwork', ['ngRoute']);
+var app = angular.module('socialNetwork', ['ngRoute']);
 
-socialNetwork.config(['$routeProvider',
-    function($routeProvider) {
+app.config(['$routeProvider', function($routeProvider) {
 
-        $routeProvider.
-            when('/welcome', {
-                templateUrl: 'templates/partial/welcome.html',
+        $routeProvider.when('/', {
+                templateUrl: 'templates/welcome.html',
                 controller: 'WelcomeController'
             });
 
-        $routeProvider.
-            when('/login', {
-                templateUrl: 'templates/partial/login.html',
+        $routeProvider.when('/login', {
+                templateUrl: 'templates/login.html',
                 controller: 'LoginController'
             });
 
-        $routeProvider.
-            otherwise({
-                redirectTo: '/welcome'
+    $routeProvider.when('/register', {
+        templateUrl: 'templates/register.html',
+        controller: 'RegisterController'
+    });
+
+        $routeProvider.otherwise({
+                redirectTo: '/'
             });
     }]);
 
-socialNetwork.constant('baseServiceUrl', 'http://softuni-social-network.azurewebsites.net/api/');
+app.constant('baseServiceUrl', 'http://softuni-social-network.azurewebsites.net/api/');

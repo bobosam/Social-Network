@@ -1,4 +1,4 @@
-socialNetwork.controller('LoginController',
+app.controller('LoginController',
     function LoginController($scope, $location, authentication, notify) {
         $scope.login = function(loginData, loginForm) {
             if (loginForm.$valid) {

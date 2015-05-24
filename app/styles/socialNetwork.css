@@ -1,3 +1,16 @@
-#welcome-img{
+#welcome-img {
     height: 350px;
 }
+
+#login-register-img {
+    height: 250px;
+}
+
+#login {
+    padding-top: 150px;
+}
+
+#register-form{
+    padding-top: 25px;
+    }
+

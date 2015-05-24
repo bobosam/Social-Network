@@ -1,7 +1,6 @@
 'use strict';
 
-socialNetwork.controller('WelcomeController',
-    function WelcomeController($scope, $location) {
+app.controller('WelcomeController', function WelcomeController($scope, $location) {
         $scope.showLogin = function showLogin() {
             $location.path('/login');
         };
