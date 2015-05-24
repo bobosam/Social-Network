@@ -6,16 +6,25 @@ app.factory('userData', ['$resource', 'baseServiceUrl', 'authentication', functi
             .$promise
             .then(function (data) {
                 authentication.saveUser(data);
-               console.log( authentication.getHeaders());
             })
     }
 
     function loginUser(user) {
-
+        return $resource(baseServiceUrl + 'users/login')
+            .save(user)
+            .$promise
+            .then(function (data) {
+                authentication.saveUser(data);
+            })
     }
 
     function logoutUser() {
-
+        return $resource(baseServiceUrl + 'users/logout')
+            .save(user)
+            .$promise
+            .then(function (data) {
+                authentication.removeUser(data);
+            })
     }
 
     return {
