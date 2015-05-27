@@ -1,6 +1,6 @@
 !function(root, factory) {
     if (typeof define === 'function' && define.amd) {
-        define(['jquery.noty'], factory);
+        define(['jquery.noty.js'], factory);
     } else {
         factory(root.jQuery);
     } }(this, function($) {

@@ -1,7 +1,7 @@
 app.controller('LoginController', function LoginController($scope, $location, notify, authentication) {
     $scope.login = function (loginData, loginForm) {
         if (loginForm.$valid) {
-            authentication.login(loginData)
+            authentication.userLogin(loginData)
                 .then(function successHandler(data) {
                     authentication.setCredentials(data);
                     notify.info("Login successful.");
