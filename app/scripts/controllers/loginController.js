@@ -1,9 +1,19 @@
-app.controller('LoginController', ['$scope', 'userData', '$location', function($scope, userData, $location){
-    $scope.login = function(user){
-        userData.login(user);
-    }
+app.controller('LoginController', function LoginController($scope, $location, notify, authentication) {
+    $scope.login = function (loginData, loginForm) {
+        if (loginForm.$valid) {
+            authentication.login(loginData)
+                .then(function successHandler(data) {
+                    authentication.setCredentials(data);
+                    notify.info("Login successful.");
+                    $location.path('/users/me');
+                },
+                function errorHandler(error) {
+                    notify.error("Login failed!");
+                })
+        }
+    };
 
-    $scope.cancelLogin = function cancelLogin() {
+    $scope.cancelLogin = function () {
         $location.path('/');
     }
-}]);
+});

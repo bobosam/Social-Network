@@ -1,6 +1,6 @@
 'use strict';
 
-socialNetwork.factory('notify', function () {
+app.factory('notify', function () {
 
     var service = {};
 
@@ -9,7 +9,7 @@ socialNetwork.factory('notify', function () {
             text: text,
             type: type,
             dismissQueue: true,
-            layout: 'bottomCenter',
+            layout: 'topCenter',
             theme: 'defaultTheme',
             maxVisible: 10,
             timeout: time

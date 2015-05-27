@@ -1,35 +1,30 @@
-app.factory('userData', ['$resource', 'baseServiceUrl', 'authentication', function ($resource, baseServiceUrl, authentication) {
+app.factory('userData', function userData($http, requester, baseServiceUrl, authentication) {
+    var serviceUrl = baseServiceUrl + 'users';
+    var service = {};
 
-    function registerUser(user) {
-        return $resource(baseServiceUrl + 'users/register')
-            .save(user)
-            .$promise
-            .then(function (data) {
-                authentication.saveUser(data);
-            })
-    }
+    service.getUserPreviewData = function(userName){
+        return requester('get', serviceUrl + '/' + userName + '/preview', authentication.getHeaders());
+    };
 
-    function loginUser(user) {
-        return $resource(baseServiceUrl + 'users/login')
-            .save(user)
-            .$promise
-            .then(function (data) {
-                authentication.saveUser(data);
-            })
-    }
+    service.getUserFullData = function(userName){
+        return requester('get', serviceUrl + '/' + userName, authentication.getHeaders());
+    };
 
-    function logoutUser() {
-        return $resource(baseServiceUrl + 'users/logout')
-            .save(user)
-            .$promise
-            .then(function (data) {
-                authentication.removeUser(data);
-            })
-    }
+    service.searchUsersByName = function(keyword){
+        return requester('get', serviceUrl + '/search?searchTerm=' + keyword, authentication.getHeaders());
+    };
 
-    return {
-        register: registerUser,
-        login: loginUser,
-        logout: logoutUser
-    }
-}])
+    service.getFriendWallByPages = function(userName, startPostId){
+        return requester('get', serviceUrl + '/' + userName + '/wall?StartPostId=' + startPostId + '&PageSize=5', authentication.getHeaders());
+    };
+
+    service.getFriendsDetailedFriendsList = function (userName){
+        return requester('get', serviceUrl + '/' + userName + '/friends', authentication.getHeaders());
+    };
+
+    service.getFriendsFriendsPreview = function (userName){
+        return requester('get', serviceUrl + '/' + userName + '/friends/preview', authentication.getHeaders());
+    };
+
+    return service;
+});

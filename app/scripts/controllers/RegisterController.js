@@ -1,10 +1,20 @@
-app.controller('RegisterController', ['$scope', 'userData', '$location', function ($scope, userData, $location) {
-    $scope.register = function (user) {
-        userData.register(user)
-    }
+app.controller('RegisterController', function RegisterController($scope, $location, notify, authentication) {
+    $scope.register = function (registerData, registerForm) {
+        if (registerForm.$valid) {
+            authentication.register(registerData)
+                .then(function successHandler(data) {
+                    authentication.setCredentials(data);
+                    notify.info("Registration successful.");
+                    $location.path('/users/me');
+                },
+                function errorHandler(error) {
+                    notify.error("Registration failed!");
+                })
+        }
+    };
 
-    $scope.cancelRegister = function cancelRegister() {
+    $scope.cancelRegister = function () {
         $location.path('/');
     }
 
-}]);
+});

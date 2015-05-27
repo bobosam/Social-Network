@@ -1,32 +1,69 @@
-app.factory('authentication', function(){
-    var key = 'user';
+app.factory('authentication', function authentication($http, requester, baseServiceUrl){
+    var serviceUrl = baseServiceUrl + 'users';
+    var service = {};
 
-    function saveUserData(data){
-        localStorage.setItem(key, angular.toJson(data));
-    }
+    service.userLogin = function(loginData){
+        return requester('post', serviceUrl + '/login', null, loginData);
+    };
 
-    function getUserData(data){
-       return angular.fromJson(localStorage.getItem(key));
-    }
+    service.userRegister = function(registerData){
+        return requester('post', serviceUrl +'/register', null, registerData);
+    };
 
-    function getHeaders(argument){
-        var headers = {};
-        var userData = getUserData();
-        if(userData){
-            headers.Authorization = 'Bearer ' + getUserData().access_token;
+    service.userLogout = function(){
+        return requester('post', serviceUrl + '/logout', this.getHeaders());
+    };
+
+    service.editProfile = function(profileData){
+        return requester('put', baseServiceUrl + 'me', this.getHeaders(), profileData);
+    };
+
+    service.getHeaders = function(){
+        return{
+            Authorization: 'Bearer ' + localStorage['accessToken']
         }
+    };
 
-        return headers;
-    }
+    service.setCredentials = function(serverData){
+        localStorage['accessToken']= serverData.access_token;
+        localStorage['userName'] = serverData.userName;
+    };
 
-    function removeUser(){
-        localStorage.removeItem(key);
-    }
+    service.clearCredentials = function(){
+        localStorage.clear();
+    };
 
-    return{
-        saveUser: saveUserData,
-        getUser: getUserData,
-        getHeaders: getHeaders,
-        removeUser: removeUser
-    }
+    service.getUserName = function(){
+        return localStorage['userName'];
+    };
+
+    service.isLogged = function(){
+        return localStorage['accessToken'];
+    };
+
+    service.setName = function(name){
+        localStorage['name'];
+    };
+
+    service.getName = function(){
+        return localStorage['name'];
+    };
+
+    service.setProfileImageData = function (profileImageData){
+        localStorage['profileImageData'] = profileImageData;
+    };
+
+    service.getProfileImageData = function(){
+        return localStorage['profileImageData'];
+    };
+
+    service.setCoverImageData = function(coverImageData){
+        localStorage['coverImageData'] = coverImageData;
+    };
+
+    service.getCoverImageData = function(){
+        return localStorage['coverImageData'];
+    };
+
+    return service;
 });
