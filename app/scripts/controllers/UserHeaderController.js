@@ -82,7 +82,7 @@ app.controller('UserHeaderController', function UserHeaderController($scope,
         function errorHandler(error){
             notify.error("Reject failed!")
         })
-    }
+    };
 
     $scope.searchPeople = function (keyword) {
         if(keyword.length == 0) {
@@ -104,10 +104,10 @@ app.controller('UserHeaderController', function UserHeaderController($scope,
         );
     };
 
+    var searchX,searchY;
     $scope.setCoordinates = function ($event) {
-        var searchX = $event.srcElement.offsetLeft;
-        var
-            searchY = $event.srcElement.offsetTop;
+        searchX = $event.srcElement.offsetLeft;
+        searchY = $event.srcElement.offsetTop;
     };
 
     $scope.showSearchResults = function ($event, keyword) {
@@ -119,7 +119,7 @@ app.controller('UserHeaderController', function UserHeaderController($scope,
             return;
         }
 
-        usersData.searchUsersByName(keyword)
+        userData.searchUsersByName(keyword)
             .then(
             function successHandler(data) {
                 $scope.people = data;
