@@ -14,7 +14,7 @@ app.controller('UserHeaderController', function UserHeaderController($scope,
             if (data.profileImageData) {
                 $scope.profileImageData = data.profileImageData;
             } else {
-                document.getElementById('me-preview').src = 'img/noavatar.jpg';
+                document.getElementById('me-preview').src = 'img/noAvatar.jpg';
             }
 
             authentication.setName($scope.name);
@@ -90,7 +90,7 @@ app.controller('UserHeaderController', function UserHeaderController($scope,
             return;
         }
 
-        usersData.searchUsersByName(keyword)
+        userData.searchUsersByName(keyword)
             .then(
             function successHandler(data) {
                 $scope.people = data;
