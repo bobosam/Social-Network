@@ -37,7 +37,7 @@ app.controller('UserHeaderController', function UserHeaderController($scope,
 
     $scope.logout = function () {
         authentication.logout()
-            .then(function successHandler() {
+            .then(function successHandler(data) {
                 authentication.clearCredentials();
                 notify.info("Logout successful.");
                 $location.path('/')
@@ -55,7 +55,7 @@ app.controller('UserHeaderController', function UserHeaderController($scope,
         container.style.top = topPosition + 'px';
         container.style.left = leftPosition + 'px';
         $scope.isFriendRequestsVisible = true;
-    }
+    };
 
     $scope.approveFriendRequest = function (request) {
         profileData.approveFriendRequest(request.id)
@@ -69,7 +69,7 @@ app.controller('UserHeaderController', function UserHeaderController($scope,
                 notify.error("Approve failed.");
             }
         );
-    }
+    };
 
     $scope.rejectFriendRequest = function(request){
         profileData.rejectFriendRequest(request.id)
@@ -84,11 +84,59 @@ app.controller('UserHeaderController', function UserHeaderController($scope,
         })
     }
 
-    $scope.searchPeople = function(){
-        //TODO
-    }
+    $scope.searchPeople = function (keyword) {
+        if(keyword.length == 0) {
+            $scope.areSearchResultsVisible = false;
+            return;
+        }
 
-    $scope.showSearchResults = function(){
-        //TODO
-    }
+        usersData.searchUsersByName(keyword)
+            .then(
+            function successHandler(data) {
+                $scope.people = data;
+                $scope.peopleCount = data.length;
+                $scope.showSearchResults();
+                console.log(data);
+            },
+            function (error) {
+                console.log(error);
+            }
+        );
+    };
+
+    $scope.setCoordinates = function ($event) {
+        var searchX = $event.srcElement.offsetLeft;
+        var
+            searchY = $event.srcElement.offsetTop;
+    };
+
+    $scope.showSearchResults = function ($event, keyword) {
+
+        console.log();
+
+        if(keyword.length == 0) {
+            $scope.areSearchResultsVisible = false;
+            return;
+        }
+
+        usersData.searchUsersByName(keyword)
+            .then(
+            function successHandler(data) {
+                $scope.people = data;
+                $scope.peopleCount = data.length;
+
+                var leftPosition = searchX,
+                    topPosition = searchY + 40,
+                    container = document.getElementById('peopleSearchContainer');
+
+                container.style.top = topPosition + 'px';
+                container.style.left = leftPosition + 'px';
+
+                $scope.areSearchResultsVisible = true;
+            },
+            function (error) {
+                console.log(error);
+            }
+        );
+    };
 });
