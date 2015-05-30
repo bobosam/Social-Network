@@ -1,7 +1,9 @@
-app.directive('editProfile', function() {
+'use strict';
+
+socialNetwork.directive('editProfile', function() {
     return {
         restrict: 'AE',
-        templateUrl: 'templates/directives/edit-profile-form.html',
+        templateUrl: 'partials/directives/edit-profile-form.html',
         controller: 'EditProfileController',
         replace: true
     }

@@ -1,7 +1,9 @@
-app.directive('comment', function () {
+'use strict';
+
+socialNetwork.directive('comment', function () {
     return {
         restrict: 'C',
-        templateUrl: 'templates/directives/comment.html',
+        templateUrl: 'partials/directives/comment.html',
         controller: 'CommentController',
         replace: false
     }

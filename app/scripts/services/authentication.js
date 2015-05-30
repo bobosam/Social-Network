@@ -1,67 +1,71 @@
-app.factory('authentication', function authentication($http, requester, baseServiceUrl){
-    var serviceUrl = baseServiceUrl + 'users';
-    var service = {};
+'use strict';
 
-    service.userLogin = function(loginData){
-        return requester('post', serviceUrl + '/login', null, loginData);
+socialNetwork.factory('authentication', function authentication($http, baseServiceUrl, requester) {
+
+    var service = {},
+        serviceUrl = baseServiceUrl + 'users';
+
+
+    service.login = function (loginData) {
+        return requester('POST', serviceUrl + '/login', null, loginData);
     };
 
-    service.userRegister = function(registerData){
-        return requester('post', serviceUrl +'/register', null, registerData);
+    service.register = function (registerData) {
+        return requester('POST', serviceUrl + '/register', null, registerData);
     };
 
-    service.userLogout = function(){
-        return requester('post', serviceUrl + '/logout', this.getHeaders());
+    service.logout = function () {
+        return requester('POST', serviceUrl + '/logout', this.getHeaders());
     };
 
-    service.editProfile = function(profileData){
-        return requester('put', baseServiceUrl + 'me', this.getHeaders(), profileData);
+    service.editUserProfile = function (profile) {
+        return requester('PUT', baseServiceUrl + 'me', this.getHeaders(), profile);
     };
 
-    service.getHeaders = function(){
-        return{
+    service.setCredentials = function (serverData) {
+        localStorage['accessToken'] = serverData.access_token;
+        localStorage['username'] = serverData.userName;
+    };
+
+    service.getUserName = function () {
+        return localStorage['username'];
+    };
+
+    service.clearCredentials = function () {
+        localStorage.clear();
+    };
+
+    service.getHeaders = function () {
+        return {
             Authorization: 'Bearer ' + localStorage['accessToken']
         }
     };
 
-    service.setCredentials = function(serverData){
-        localStorage['accessToken']= serverData.access_token;
-        localStorage['userName'] = serverData.userName;
-    };
-
-    service.clearCredentials = function(){
-        localStorage.clear();
-    };
-
-    service.getUserName = function(){
-        return localStorage['userName'];
-    };
-
-    service.isLogged = function(){
+    service.isLogged = function () {
         return localStorage['accessToken'];
     };
 
-    service.setName = function(name){
-        localStorage['name'];
+    service.setName = function (name) {
+        localStorage['name'] = name;
     };
 
-    service.getName = function(){
+    service.getName = function () {
         return localStorage['name'];
     };
 
-    service.setProfileImageData = function (profileImageData){
+    service.setProfileImageData = function (profileImageData) {
         localStorage['profileImageData'] = profileImageData;
     };
 
-    service.getProfileImageData = function(){
+    service.getProfileImageData = function () {
         return localStorage['profileImageData'];
     };
 
-    service.setCoverImageData = function(coverImageData){
+    service.setCoverImageData = function (coverImageData) {
         localStorage['coverImageData'] = coverImageData;
     };
 
-    service.getCoverImageData = function(){
+    service.getCoverImageData = function () {
         return localStorage['coverImageData'];
     };
 

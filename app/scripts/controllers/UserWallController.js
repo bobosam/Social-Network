@@ -1,26 +1,27 @@
-app.controller('UserWallController', function UserWallController($scope,
-                                                                 $location,
-                                                                 $routeParams,
-                                                                 notify,
-                                                                 authentication,
-                                                                 usersData,
-                                                                 profileData) {
+'use strict';
+
+socialNetwork.controller('UserWallController',
+    function UserWallController($scope, authentication, $location, $routeParams, usersData, profileData, notify) {
 
         if (!authentication.isLogged()) {
-            $location.path('/');
+            $location.path('/welcome');
             return;
         }
 
-        $scope.isMe = ($routeParams.username === authentication.getUserName()) ? true : false;
+        $scope.isMe = $routeParams.username === authentication.getUserName() ? true : false;
+
         $scope.friendUserName = $routeParams.username;
         $scope.friend = true;
+
         usersData.getUserFullData($routeParams.username)
-            .then(function successHandler(data) {
+            .then(
+            function successHandler(data) {
                 $scope.user = data;
                 $scope.friend = data.isFriend;
 
                 usersData.getFriendWallByPages($routeParams.username, "")
-                    .then(function successHandler(data) {
+                    .then(
+                    function successHandler(data) {
                         $scope.posts = data;
                         if (data.length == 0) {
                             $scope.isNewsFeedEmpty = true;
@@ -41,7 +42,8 @@ app.controller('UserWallController', function UserWallController($scope,
 
         $scope.inviteFriend = function () {
             profileData.sendFriendRequest($routeParams.username)
-                .then(function successHandler(data) {
+                .then(
+                function successHandler(data) {
                     $scope.user.hasPendingRequest = true;
 
                     notify.info("Invitation sent.")

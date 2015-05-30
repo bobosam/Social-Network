@@ -1,6 +1,7 @@
-app.factory('requester', function requester($q, $http) {
+socialNetwork.factory('requester', function requester($q, $http) {
     return function (method, url, headers, data) {
         var deferred = $q.defer();
+
         $http({
             method: method,
             url: url,
@@ -12,4 +13,4 @@ app.factory('requester', function requester($q, $http) {
 
         return deferred.promise;
     }
-})
+});

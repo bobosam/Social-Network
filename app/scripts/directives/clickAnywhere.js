@@ -1,4 +1,4 @@
-app.directive('clickAnywhere', function($document){
+socialNetwork.directive('clickAnywhere', function($document){
     return {
         restrict: 'A',
         link: function(scope, elem, attr, ctrl) {

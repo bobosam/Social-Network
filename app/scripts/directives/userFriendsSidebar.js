@@ -1,7 +1,10 @@
-app.directive('userFriendsSidebar', function () {
+'use strict';
+
+socialNetwork.directive('userFriendsSidebar', function() {
+
     return {
         restrict: 'A',
-        templateUrl: 'templates/directives/user-friends-sidebar.html',
+        templateUrl: 'partials/directives/user-friends-sidebar.html',
         controller: 'UserFriendsController',
         replace: false,
         scope: {

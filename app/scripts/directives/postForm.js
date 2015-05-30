@@ -1,7 +1,9 @@
-app.directive('postForm', function() {
+'use strict';
+
+socialNetwork.directive('postForm', function() {
     return {
         restrict: 'AE',
-        templateUrl: 'templates/directives/post-form.html',
+        templateUrl: 'partials/directives/post-form.html',
         controller: 'HomeController',
         replace: true
     }

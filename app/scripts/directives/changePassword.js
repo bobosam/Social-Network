@@ -1,7 +1,9 @@
-app.directive('changePassword', function() {
+'use strict';
+
+socialNetwork.directive('changePassword', function() {
     return {
         restrict: 'AE',
-        templateUrl: 'templates/directives/change-password-form.html',
+        templateUrl: 'partials/directives/change-password-form.html',
         replace: true
     }
 });

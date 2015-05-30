@@ -1,57 +1,57 @@
-var app = angular.module('socialNetwork', ['ngRoute', 'ui.bootstrap']);
+var socialNetwork = angular.module('socialNetwork', ['ngRoute', 'ui.bootstrap']);
 
-app.constant('baseServiceUrl', 'http://softuni-social-network.azurewebsites.net/api/');
+socialNetwork.config(['$routeProvider',
+    function($routeProvider) {
 
-app.config(['$routeProvider', function ($routeProvider) {
-    $routeProvider.
-        when('/', {
-            templateUrl: 'templates/welcome.html',
-            controller: 'WelcomeController'
-        });
-    $routeProvider.
-        when('/login', {
-            templateUrl: 'templates/login.html',
-            controller: 'LoginController'
-        });
-    $routeProvider.
-        when('/register', {
-            templateUrl: 'templates/register.html',
-            controller: 'RegisterController'
-        });
-    $routeProvider.
-        when('/users/me', {
-            templateUrl: 'templates/home.html',
-            controller: 'HomeController'
-        });
-    $routeProvider.
-        when('/users/:username', {
-            templateUrl: 'templates/user-wall.html',
-            controller: 'UserWallController'
-        });
-    $routeProvider.
-        when('/users/:username/friends', {
-            templateUrl: 'templates/friends.html',
-            controller: 'FriendsController'
-        });
+        $routeProvider.
+            when('/welcome', {
+                templateUrl: 'partials/welcome.html',
+                controller: 'WelcomeController'
+            });
+        $routeProvider.
+            when('/login', {
+                templateUrl: 'partials/login.html',
+                controller: 'LoginController'
+            });
+        $routeProvider.
+            when('/register', {
+                templateUrl: 'partials/register.html',
+                controller: 'RegisterController'
+            });
+        $routeProvider.
+            when('/users/me', {
+                templateUrl: 'partials/home.html',
+                controller: 'HomeController'
+            });
+        $routeProvider.
+            when('/users/:username', {
+                templateUrl: 'partials/user-wall.html',
+                controller: 'UserWallController'
+            });
+        $routeProvider.
+            when('/users/:username/friends', {
+                templateUrl: 'partials/friends.html',
+                controller: 'FriendsController'
+            });
 
-    $routeProvider.
-        when('/profile', {
-            templateUrl: 'templates/edit-profile.html',
-            controller: 'EditProfileController'
-        });
-    $routeProvider.
-        when('/profile/password', {
-            templateUrl: 'templates/change-password.html',
-            controller: 'ChangePasswordController'
-        });
-    $routeProvider.
-        when('/logout', {
-            controller: 'LogoutController'
-        });
+        $routeProvider.
+            when('/profile', {
+                templateUrl: 'partials/edit-profile.html',
+                controller: 'EditProfileController'
+            });
+        $routeProvider.
+            when('/profile/password', {
+                templateUrl: 'partials/change-password.html',
+                controller: 'ChangePasswordController'
+            });
+        $routeProvider.
+            when('/logout', {
+                controller: 'LogoutController'
+            });
+        $routeProvider.
+            otherwise({
+                redirectTo: '/welcome'
+            });
+    }]);
 
-    $routeProvider.
-        otherwise({
-            redirectTo: '/'
-        });
-}]);
-
+socialNetwork.constant('baseServiceUrl', 'http://softuni-social-network.azurewebsites.net/api/');

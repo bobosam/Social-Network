@@ -1,17 +1,20 @@
-app.controller('EditProfileController', function EditProfileController($scope, $location, authentication, profileData, notify) {
+socialNetwork.controller('EditProfileController',
+    function EditProfileController($scope, $location, authentication, profileData, notify) {
+
         if (!authentication.isLogged()) {
-            $location.path('/');
+            $location.path('/welcome');
             return;
         }
 
         profileData.getDataAboutMe()
-            .then(function successHandler(data) {
+            .then(
+            function successHandler(data) {
                 $scope.data = data;
                 if (!data.profileImageData) {
-                    document.getElementById('profileImagePreview').src = "img/noAvatar.jpg";
+                    document.getElementById('profileImagePreview').src = "img/noavatar.jpg";
                 }
                 if (!data.coverImageData) {
-                    document.getElementById('coverImagePreview').src = "img/noCover.png";
+                    document.getElementById('coverImagePreview').src = "img/nocover.png";
                 }
             },
             function errorHandler(error) {
@@ -63,7 +66,7 @@ app.controller('EditProfileController', function EditProfileController($scope, $
 
         $scope.editProfile = function (profile, editProfileForm) {
             if (editProfileForm.$valid) {
-                authentication.editProfile(profile)
+                authentication.editUserProfile(profile)
                     .then(
                     function successHandler(data) {
                         authentication.setName(data.name);

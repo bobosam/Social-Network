@@ -1,4 +1,4 @@
-app.controller('WelcomeController', function WelcomeController($scope, $location) {
+socialNetwork.controller('WelcomeController', function WelcomeController($scope, $location) {
     $scope.showLogin = function showLogin() {
         $location.path('/login');
     };

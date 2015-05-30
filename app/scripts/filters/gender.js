@@ -1,4 +1,6 @@
-app.filter('gender', function() {
+'use strict';
+
+socialNetwork.filter('gender', function() {
     return function(input) {
         input = parseInt(input);
         switch (input) {
