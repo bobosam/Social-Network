@@ -1,8 +1,6 @@
-'use strict';
-
-socialNetwork.factory('profileData', function profileData($http, requester, authentication , baseServiceUrl) {
-    var service = {},
-        serviceUrl = baseServiceUrl + 'me';
+socialNetwork.factory('profileData', function profileData($http, requester, authentication, baseServiceUrl) {
+    var service = {};
+    var serviceUrl = baseServiceUrl + 'me';
 
     service.getDataAboutMe = function () {
         return requester('GET', serviceUrl, authentication.getHeaders());

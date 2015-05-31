@@ -1,10 +1,6 @@
-'use strict';
-
 socialNetwork.factory('authentication', function authentication($http, baseServiceUrl, requester) {
-
-    var service = {},
-        serviceUrl = baseServiceUrl + 'users';
-
+    var service = {};
+    var serviceUrl = baseServiceUrl + 'users';
 
     service.login = function (loginData) {
         return requester('POST', serviceUrl + '/login', null, loginData);

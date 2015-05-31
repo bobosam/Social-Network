@@ -1,11 +1,8 @@
-'use strict';
-
-socialNetwork.factory('commentsData', function commentsData($http, requester, authentication , baseServiceUrl) {
-    var service = {},
-        serviceUrl = baseServiceUrl + 'posts';
+socialNetwork.factory('commentsData', function commentsData($http, requester, authentication, baseServiceUrl) {
+    var service = {};
+    var serviceUrl = baseServiceUrl + 'posts';
 
     service.getPostComments = function getPostComments(postId) {
-
         return requester('GET', serviceUrl + '/' + postId + '/comments', authentication.getHeaders());
     };
 
@@ -26,7 +23,7 @@ socialNetwork.factory('commentsData', function commentsData($http, requester, au
     service.deletePostComment = function (postId, commentId) {
         return requester('DELETE', serviceUrl + '/' + postId + '/comments' + '/' + commentId, authentication.getHeaders());
     };
-    
+
     service.getCommentDetailedLikes = function (postId, commentId) {
         return requester('GET', serviceUrl + '/' + postId + '/comments' + '/' + commentId + '/likes', authentication.getHeaders());
     };

@@ -1,8 +1,6 @@
-'use strict';
-
 socialNetwork.factory('usersData', function usersData($http, requester, authentication, baseServiceUrl) {
-    var service = {},
-        serviceUrl = baseServiceUrl + 'users';
+    var service = {};
+    var serviceUrl = baseServiceUrl + 'users';
 
     service.getUserPreviewData = function (username) {
         return requester('GET', serviceUrl + '/' + username + '/preview', authentication.getHeaders());
