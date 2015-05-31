@@ -5,8 +5,8 @@
             <th colspan="2"><a href="#/users/{{username}}/friends">Total friends: {{friendsCount}}</a></th>
         </tr>
         </thead>
-        <tbody>
-        <tr ng-repeat="friend in friends | limitTo: 5">
+        <tbody ng-repeat="friend in friends | limitTo: 6">
+        <tr >
             <td>
                 <img ng-src="{{friend.profileImageData || 'img/noavatar.jpg'}}" class="img-rounded img-thumbnail friend-preview-img"/>
             </td>

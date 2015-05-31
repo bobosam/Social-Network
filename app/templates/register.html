@@ -15,13 +15,13 @@
 
             <div class="form-group" ng-class="{ 'has-error' : registerForm.password.$invalid && !registerForm.password.$pristine }">
                 <label>Password:</label>
-                <input type="password" required name="password" class="form-control input-sm" ng-model="user.password">
+                <input type="password" required name="password" class="form-control input-sm" ng-model="user.password" placeholder="Password must be at least 6 characters long!">
                 <p ng-show="registerForm.password.$invalid && !registerForm.password.$pristine" class="help-block">Password is missing.</p>
             </div>
 
             <div class="form-group" ng-class="{ 'has-error' : registerForm.confirmPassword.$invalid && !registerForm.confirmPassword.$pristine }">
                 <label>Confirm password:</label>
-                <input type="password" required name="confirmPassword" class="form-control input-sm" ng-model="user.confirmPassword">
+                <input type="password" required name="confirmPassword" class="form-control input-sm" ng-model="user.confirmPassword" placeholder="Password must be at least 6 characters long!">
                 <p ng-show="registerForm.confirmPassword.$invalid && !registerForm.confirmPassword.$pristine" class="help-block">Please, confirm the password.</p>
             </div>
 

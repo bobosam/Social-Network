@@ -1,47 +1,49 @@
 var socialNetwork = angular.module('socialNetwork', ['ngRoute', 'ui.bootstrap']);
 
+socialNetwork.constant('baseServiceUrl', 'http://softuni-social-network.azurewebsites.net/api/');
+
 socialNetwork.config(['$routeProvider',
-    function($routeProvider) {
+    function ($routeProvider) {
 
         $routeProvider.
             when('/welcome', {
-                templateUrl: 'partials/welcome.html',
+                templateUrl: 'templates/welcome.html',
                 controller: 'WelcomeController'
             });
         $routeProvider.
             when('/login', {
-                templateUrl: 'partials/login.html',
+                templateUrl: 'templates/login.html',
                 controller: 'LoginController'
             });
         $routeProvider.
             when('/register', {
-                templateUrl: 'partials/register.html',
+                templateUrl: 'templates/register.html',
                 controller: 'RegisterController'
             });
         $routeProvider.
             when('/users/me', {
-                templateUrl: 'partials/home.html',
+                templateUrl: 'templates/home.html',
                 controller: 'HomeController'
             });
         $routeProvider.
             when('/users/:username', {
-                templateUrl: 'partials/user-wall.html',
+                templateUrl: 'templates/user-wall.html',
                 controller: 'UserWallController'
             });
         $routeProvider.
             when('/users/:username/friends', {
-                templateUrl: 'partials/friends.html',
+                templateUrl: 'templates/friends.html',
                 controller: 'FriendsController'
             });
 
         $routeProvider.
             when('/profile', {
-                templateUrl: 'partials/edit-profile.html',
+                templateUrl: 'templates/edit-profile.html',
                 controller: 'EditProfileController'
             });
         $routeProvider.
             when('/profile/password', {
-                templateUrl: 'partials/change-password.html',
+                templateUrl: 'templates/change-password.html',
                 controller: 'ChangePasswordController'
             });
         $routeProvider.
@@ -54,4 +56,3 @@ socialNetwork.config(['$routeProvider',
             });
     }]);
 
-socialNetwork.constant('baseServiceUrl', 'http://softuni-social-network.azurewebsites.net/api/');

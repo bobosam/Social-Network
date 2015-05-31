@@ -1,9 +1,7 @@
-'use strict';
-
 socialNetwork.directive('comment', function () {
     return {
-        restrict: 'C',
-        templateUrl: 'partials/directives/comment.html',
+        restrict: 'EC',
+        templateUrl: 'templates/directives/comment.html',
         controller: 'CommentController',
         replace: false
     }

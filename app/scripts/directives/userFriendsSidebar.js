@@ -4,7 +4,7 @@ socialNetwork.directive('userFriendsSidebar', function() {
 
     return {
         restrict: 'A',
-        templateUrl: 'partials/directives/user-friends-sidebar.html',
+        templateUrl: 'templates/directives/user-friends-sidebar.html',
         controller: 'UserFriendsController',
         replace: false,
         scope: {

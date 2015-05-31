@@ -116,7 +116,7 @@ socialNetwork.controller('CommentController',
             }
 
             var modalInstance = $modal.open({
-                templateUrl: 'partials/directives/edit-posting.html',
+                templateUrl: 'templates/directives/edit-posting.html',
                 controller: 'EditPostingController',
                 resolve: {
                     'posting': function () {

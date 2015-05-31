@@ -1,10 +1,7 @@
-'use strict';
-
 socialNetwork.directive('postToUser', function() {
-
     return {
         restrict: 'A',
-        templateUrl: 'partials/directives/post-to-user.html',
+        templateUrl: 'templates/directives/post-to-user.html',
         controller: 'PostToUserController',
         replace: false,
         scope: {

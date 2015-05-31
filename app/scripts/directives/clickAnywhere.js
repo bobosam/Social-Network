@@ -1,15 +1,13 @@
-socialNetwork.directive('clickAnywhere', function($document){
+socialNetwork.directive('clickAnywhere', function ($document) {
     return {
         restrict: 'A',
-        link: function(scope, elem, attr, ctrl) {
-            elem.bind('click', function(e) {
-                // this part keeps it from firing the click on the document.
+        link: function (scope, elem, attr, ctrl) {
+            elem.bind('click', function (e) {
                 e.stopPropagation();
             });
-            $document.bind('click', function() {
-                // magic here.
+            $document.bind('click', function () {
                 scope.$apply(attr.clickAnywhere);
             })
         }
     }
-})
+});
