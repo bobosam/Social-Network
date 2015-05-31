@@ -1,10 +1,9 @@
 socialNetwork.controller('RegisterController',
     function RegisterController($scope, $location, authentication, notify) {
-        $scope.register = function(registerData, registerForm) {
+        $scope.register = function (registerData, registerForm) {
             if (registerForm.$valid) {
                 authentication.register(registerData)
-                    .then(
-                    function successHandler(data) {
+                    .then(function successHandler(data) {
                         authentication.setCredentials(data);
                         notify.info("Registration successful.");
                         $location.path('/users/me');
@@ -16,10 +15,10 @@ socialNetwork.controller('RegisterController',
             }
         };
 
-        $scope.passwordPattern = (function() {
+        $scope.passwordPattern = (function () {
             var regexp = /.{6,}/;
             return {
-                test: function(value) {
+                test: function (value) {
                     return regexp.test(value);
                 }
             };

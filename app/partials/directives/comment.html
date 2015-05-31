@@ -34,7 +34,7 @@
         <!-- End User preview element-->
         <br/>
 
-        <p>{{comment.date | date:"dd/MM/yyyy ' at ' hh-mm-ss Z" : "+3000"}}</span></p>
+        <p>{{comment.date | date:"dd/MM/yyyy ' at ' hh-mm-ss"}}</span></p>
 
         <p>{{comment.commentContent}}</p>
         <p>
@@ -49,7 +49,7 @@
                 <label class="sr-only" for="exampleComment">Comment here</label>
                 <input type="text" class="form-control input-sm" id="exampleComment" ng-model="replyContent">
             </div>
-            <button type="submit" class="btn btn-default input-sm pull-right comment-button" ng-click="addComment()">Comment</button>
+            <button type="submit" class="btn btn-danger input-sm pull-right comment-button" ng-click="addComment()">Comment</button>
         </form>
         </p>
     </td>

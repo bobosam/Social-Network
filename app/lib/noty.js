@@ -6,7 +6,7 @@ define(['notyLibrary'], function (Noty) {
                 text: text,
                 type: type,
                 dismissQueue: true,
-                layout: 'bottomCenter',
+                layout: 'topCenter',
                 theme: 'defaultTheme',
                 maxVisible: 10,
                 timeout: time
@@ -14,11 +14,11 @@ define(['notyLibrary'], function (Noty) {
         }
 
         function success(text) {
-            display('success', text, 1500);
+            display('success', text, 2000);
         }
 
         function error(text) {
-            display('error', text, 1500);
+            display('error', text, 2000);
         }
 
         return {

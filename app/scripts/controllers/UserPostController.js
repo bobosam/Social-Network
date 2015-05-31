@@ -1,16 +1,13 @@
 socialNetwork.controller('UserPostController',
     function PostController($scope, $document, $modal, authentication, postsData, commentsData, usersData, profileData, notify) {
-
         $scope.isUserPreviewVisible = false;
         $scope.showComments = false;
-
         $scope.showCommentForm = function () {
             $scope.commentFormVisible = !$scope.commentFormVisible;
         };
 
         usersData.getUserPreviewData($scope.post.author.username)
-            .then(
-            function successHandler(data) {
+            .then(function successHandler(data) {
                 $scope.posterData = data;
             },
             function errorHandler(error) {
@@ -26,8 +23,7 @@ socialNetwork.controller('UserPostController',
             }
 
             commentsData.addCommentToPost($scope.post.id, $scope.commentContent)
-                .then(
-                function successHandler(data) {
+                .then(function successHandler(data) {
                     notify.info("Commented successfully.");
                     $scope.commentContent = '';
                     $scope.post.comments.push(data);
@@ -40,20 +36,17 @@ socialNetwork.controller('UserPostController',
         };
 
         $scope.likePost = function () {
-
             if (!verifyLikePostOperation($scope.post)) {
                 notify.error("You can only like/unlike posts of your friends and posts on your wall.");
                 return;
             }
 
             postsData.likePostById($scope.post.id)
-                .then(
-                function successHandler(data) {
+                .then(function successHandler(data) {
                     notify.info('Post liked.');
                     $scope.post.liked = true;
                     postsData.getPostPreviewLikes($scope.post.id)
-                        .then(
-                        function successHandler(likesData) {
+                        .then(function successHandler(likesData) {
                             $scope.post.likesCount = likesData.totalLikeCount;
                         }
                     );
@@ -65,20 +58,17 @@ socialNetwork.controller('UserPostController',
         };
 
         $scope.unlikePost = function () {
-
             if (!verifyLikePostOperation($scope.post)) {
                 notify.error("You can only like/unlike posts of your friends and posts on your wall.");
                 return;
             }
 
             postsData.unlikePostById($scope.post.id)
-                .then(
-                function successHandler(data) {
+                .then(function successHandler(data) {
                     notify.info('Post unliked');
                     $scope.post.liked = false;
                     postsData.getPostPreviewLikes($scope.post.id)
-                        .then(
-                        function successHandler(likesData) {
+                        .then(function successHandler(likesData) {
                             $scope.post.likesCount = likesData.totalLikeCount;
                         }
                     );
@@ -91,9 +81,8 @@ socialNetwork.controller('UserPostController',
 
         $scope.inviteFriend = function () {
             profileData.sendFriendRequest($scope.post.author.username)
-                .then(
-                function successHandler(data) {
-                    notify.info("Invitation sent.")
+                .then(function successHandler(data) {
+                    notify.info("Invitation sent.");
                     console.log(data);
                 },
                 function errorHandler(error) {
@@ -112,15 +101,13 @@ socialNetwork.controller('UserPostController',
         };
 
         $scope.deletePost = function () {
-
             if (!verifyDeleteOperation($scope.post)) {
                 notify.error("Delete allowed for own posts and posts on own wall.");
                 return;
             }
 
             postsData.deletePostById($scope.post.id)
-                .then(
-                function successHandler(data) {
+                .then(function successHandler(data) {
                     notify.info("Post deleted.");
                     $scope.$emit('deletePost', $scope.post);
                 },
@@ -132,7 +119,6 @@ socialNetwork.controller('UserPostController',
 
 
         $scope.open = function (modalName) {
-
             if (!verifyEditOperation($scope.post)) {
                 notify.error("Edit allowed for own posts only.");
                 return;
@@ -151,13 +137,12 @@ socialNetwork.controller('UserPostController',
             modalInstance.result.then(
                 function edit(response) {
                     postsData.editPostById(response, $scope.post.id)
-                        .then(
-                        function successHandler(data) {
+                        .then(function successHandler(data) {
                             $scope.post.postContent = response;
                             notify.info("Post edited.");
                         },
                         function (error) {
-
+                            notify.error("Edit post failed!")
                         }
                     );
                 },
@@ -166,7 +151,7 @@ socialNetwork.controller('UserPostController',
                 });
         };
 
-        $scope.$on('deleteComment', function(event, data) {
+        $scope.$on('deleteComment', function (event, data) {
             var index = $scope.post.comments.indexOf(data);
 
             if (index > -1) {
@@ -176,13 +161,10 @@ socialNetwork.controller('UserPostController',
 
         function verifyDeleteOperation(posting) {
             var currentUser = authentication.getUserName();
-
-            //If it is an own post:
             if (currentUser === posting.author.username) {
                 return true;
             }
 
-            //If it is a post on the user's wall:
             if (currentUser === posting.wallOwner.username) {
                 return true;
             }
@@ -192,8 +174,6 @@ socialNetwork.controller('UserPostController',
 
         function verifyEditOperation(posting) {
             var currentUser = authentication.getUserName();
-
-            //If it is an own post:
             if (currentUser === posting.author.username) {
                 return true;
             }

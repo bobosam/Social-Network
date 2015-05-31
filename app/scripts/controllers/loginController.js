@@ -1,10 +1,9 @@
 socialNetwork.controller('LoginController',
     function LoginController($scope, $location, authentication, notify) {
-        $scope.login = function(loginData, loginForm) {
+        $scope.login = function (loginData, loginForm) {
             if (loginForm.$valid) {
                 authentication.login(loginData)
-                    .then(
-                    function successHandler(data) {
+                    .then(function successHandler(data) {
                         authentication.setCredentials(data);
                         notify.info("Login successful.");
                         $location.path('/users/me');

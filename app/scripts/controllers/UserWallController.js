@@ -1,27 +1,20 @@
-'use strict';
-
 socialNetwork.controller('UserWallController',
     function UserWallController($scope, authentication, $location, $routeParams, usersData, profileData, notify) {
-
         if (!authentication.isLogged()) {
             $location.path('/welcome');
             return;
         }
 
         $scope.isMe = $routeParams.username === authentication.getUserName() ? true : false;
-
         $scope.friendUserName = $routeParams.username;
         $scope.friend = true;
 
         usersData.getUserFullData($routeParams.username)
-            .then(
-            function successHandler(data) {
+            .then(function successHandler(data) {
                 $scope.user = data;
                 $scope.friend = data.isFriend;
-
                 usersData.getFriendWallByPages($routeParams.username, "")
-                    .then(
-                    function successHandler(data) {
+                    .then(function successHandler(data) {
                         $scope.posts = data;
                         if (data.length == 0) {
                             $scope.isNewsFeedEmpty = true;
@@ -42,10 +35,8 @@ socialNetwork.controller('UserWallController',
 
         $scope.inviteFriend = function () {
             profileData.sendFriendRequest($routeParams.username)
-                .then(
-                function successHandler(data) {
+                .then(function successHandler(data) {
                     $scope.user.hasPendingRequest = true;
-
                     notify.info("Invitation sent.")
                 },
                 function errorHandler(error) {
@@ -54,13 +45,12 @@ socialNetwork.controller('UserWallController',
             );
         };
 
-        $scope.$on('addedPost', function(event, data) {
+        $scope.$on('addedPost', function (event, data) {
             $scope.posts.push(data);
         });
 
-        $scope.$on('deletePost', function(event, data) {
+        $scope.$on('deletePost', function (event, data) {
             var index = $scope.posts.indexOf(data);
-
             if (index > -1) {
                 $scope.posts.splice(index, 1);
             }

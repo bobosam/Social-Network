@@ -1,17 +1,14 @@
 socialNetwork.controller('UserHeaderController',
     function UserHeaderController($scope, $location, authentication, usersData, profileData, notify) {
-        var searchX,
-            searchY;
-
+        var searchX;
+        var searchY;
         $scope.username = authentication.getUserName();
         $scope.areFriendRequestsVisible = false;
         $scope.areSearchResultsVisible = false;
 
         usersData.getUserPreviewData($scope.username)
-            .then(
-            function successHandler(data) {
+            .then(function successHandler(data) {
                 $scope.name = data.name;
-
                 if (data.profileImageData) {
                     $scope.profileImageData = data.profileImageData;
                 } else {
@@ -27,8 +24,7 @@ socialNetwork.controller('UserHeaderController',
         );
 
         profileData.getFriendRequests()
-            .then(
-            function successHandler(data) {
+            .then(function successHandler(data) {
                 $scope.requests = data;
                 $scope.requestsCount = data.length;
             },
@@ -44,7 +40,6 @@ socialNetwork.controller('UserHeaderController',
                     authentication.clearCredentials();
                     notify.info("Logout successful.");
                     $location.path('/');
-
                 },
                 function errorHandler(error) {
                     notify.error("Session has expired.");
@@ -55,25 +50,21 @@ socialNetwork.controller('UserHeaderController',
         };
 
         $scope.showFriendRequests = function (event) {
-            var leftPosition = event.screenX,
-                topPosition = event.clientY + 10,
-                container = document.getElementById('friendRequestsContainer');
-
+            var leftPosition = event.screenX;
+            var topPosition = event.clientY + 10;
+            var container = document.getElementById('friendRequestsContainer');
             container.style.top = topPosition + 'px';
             container.style.left = leftPosition + 'px';
-
             $scope.areFriendRequestsVisible = true;
         };
 
         $scope.approveFriendRequest = function (request) {
             profileData.approveFriendRequest(request.id)
-                .then(
-                function successHandler(data) {
+                .then(function successHandler(data) {
                     var index = $scope.requests.indexOf(request);
                     $scope.requests.splice(index, 1);
                     $scope.requestsCount--;
                     notify.info("Friend request accepted.");
-
                 },
                 function errorHandler(error) {
                     console.log(error);
@@ -83,8 +74,7 @@ socialNetwork.controller('UserHeaderController',
 
         $scope.rejectFriendRequest = function (request) {
             profileData.rejectFriendRequest(request.id)
-                .then(
-                function successHandler(data) {
+                .then(function successHandler(data) {
                     var index = $scope.requests.indexOf(request);
                     $scope.requests.splice(index, 1);
                     $scope.requestsCount--;
@@ -97,14 +87,13 @@ socialNetwork.controller('UserHeaderController',
         };
 
         $scope.searchPeople = function (keyword) {
-            if(keyword.length == 0) {
+            if (keyword.length == 0) {
                 $scope.areSearchResultsVisible = false;
                 return;
             }
 
             usersData.searchUsersByName(keyword)
-                .then(
-                function successHandler(data) {
+                .then(function successHandler(data) {
                     $scope.people = data;
                     $scope.peopleCount = data.length;
                     $scope.showSearchResults();
@@ -122,27 +111,21 @@ socialNetwork.controller('UserHeaderController',
         };
 
         $scope.showSearchResults = function ($event, keyword) {
-
             console.log();
-
-            if(keyword.length == 0) {
+            if (keyword.length == 0) {
                 $scope.areSearchResultsVisible = false;
                 return;
             }
 
             usersData.searchUsersByName(keyword)
-                .then(
-                function successHandler(data) {
+                .then(function successHandler(data) {
                     $scope.people = data;
                     $scope.peopleCount = data.length;
-
-                    var leftPosition = searchX,
-                        topPosition = searchY + 40,
-                        container = document.getElementById('peopleSearchContainer');
-
+                    var leftPosition = searchX;
+                    var topPosition = searchY + 40;
+                    var container = document.getElementById('peopleSearchContainer');
                     container.style.top = topPosition + 'px';
                     container.style.left = leftPosition + 'px';
-
                     $scope.areSearchResultsVisible = true;
                 },
                 function (error) {

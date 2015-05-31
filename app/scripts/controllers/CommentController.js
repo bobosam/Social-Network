@@ -1,15 +1,12 @@
 socialNetwork.controller('CommentController',
     function CommentController($scope, $modal, authentication, commentsData, usersData, profileData, notify) {
-
         $scope.isUserPreviewVisible = false;
-
         $scope.showReplyForm = function () {
             $scope.replyFormVisible = !$scope.replyFormVisible;
         };
 
         usersData.getUserPreviewData($scope.comment.author.username)
-            .then(
-            function successHandler(data) {
+            .then(function successHandler(data) {
                 $scope.commenterData = data;
             },
             function errorHandler(error) {
@@ -18,15 +15,13 @@ socialNetwork.controller('CommentController',
         );
 
         $scope.addComment = function () {
-
             if (!verifyCommentOperation()) {
                 notify.error("You can only comment on posts of your friends or posts on their walls.");
                 return;
             }
 
             commentsData.addCommentToPost($scope.post.id, $scope.replyContent)
-                .then(
-                function successHandler(data) {
+                .then(function successHandler(data) {
                     notify.info("Commented successfully.");
                     $scope.commentContent = '';
                     $scope.replyFormVisible = false;
@@ -39,15 +34,13 @@ socialNetwork.controller('CommentController',
         };
 
         $scope.likeComment = function (commentObject) {
-
             if (!verifyCommentOperation()) {
                 notify.error("You can only like comments of your friends or comments on friends' walls.");
                 return;
             }
 
             commentsData.likeComment($scope.post.id, commentObject.id)
-                .then(
-                function successHandler(data) {
+                .then(function successHandler(data) {
                     notify.info('Comment liked.');
                     $scope.comment.liked = true;
                     commentsData.getCommentPreviewLikes($scope.post.id, commentObject.id)
@@ -65,8 +58,7 @@ socialNetwork.controller('CommentController',
 
         $scope.unlikeComment = function (commentObject) {
             commentsData.unlikeComment($scope.post.id, commentObject.id)
-                .then(
-                function successHandler(data) {
+                .then(function successHandler(data) {
                     notify.info('Comment unliked');
                     $scope.comment.liked = false;
                     commentsData.getCommentPreviewLikes($scope.post.id, commentObject.id)
@@ -88,8 +80,7 @@ socialNetwork.controller('CommentController',
 
         $scope.inviteFriend = function () {
             profileData.sendFriendRequest($scope.comment.author.username)
-                .then(
-                function successHandler(data) {
+                .then(function successHandler(data) {
                     notify.info("Invitation sent.");
                     $scope.commenterData.hasPendingRequest = true;
                     console.log(data);
@@ -101,15 +92,13 @@ socialNetwork.controller('CommentController',
         };
 
         $scope.deleteComment = function () {
-
             if (!verifyDeleteOperation($scope.comment)) {
                 notify.error("Delete allowed for own comments.");
                 return;
             }
 
             commentsData.deletePostComment($scope.post.id, $scope.comment.id)
-                .then(
-                function successHandler(data) {
+                .then(function successHandler(data) {
                     notify.info("Comment deleted.");
                     $scope.$root.$broadcast('deleteComment', $scope.comment);
 
@@ -121,7 +110,6 @@ socialNetwork.controller('CommentController',
         };
 
         $scope.open = function (modalName) {
-
             if (!verifyEditOperation($scope.comment)) {
                 notify.error("Edit allowed for own comments only.");
                 return;
@@ -140,8 +128,7 @@ socialNetwork.controller('CommentController',
             modalInstance.result.then(
                 function edit(response) {
                     commentsData.editPostComment($scope.post.id, $scope.comment.id, response)
-                        .then(
-                        function successHandler(data) {
+                        .then(function successHandler(data) {
                             $scope.comment.commentContent = response;
                             notify.info("Comment edited.");
                         },

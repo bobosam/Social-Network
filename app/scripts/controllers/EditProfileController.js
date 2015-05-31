@@ -1,14 +1,12 @@
 socialNetwork.controller('EditProfileController',
     function EditProfileController($scope, $location, authentication, profileData, notify) {
-
         if (!authentication.isLogged()) {
             $location.path('/welcome');
             return;
         }
 
         profileData.getDataAboutMe()
-            .then(
-            function successHandler(data) {
+            .then(function successHandler(data) {
                 $scope.data = data;
                 if (!data.profileImageData) {
                     document.getElementById('profileImagePreview').src = "img/noavatar.jpg";
@@ -67,8 +65,7 @@ socialNetwork.controller('EditProfileController',
         $scope.editProfile = function (profile, editProfileForm) {
             if (editProfileForm.$valid) {
                 authentication.editUserProfile(profile)
-                    .then(
-                    function successHandler(data) {
+                    .then(function successHandler(data) {
                         authentication.setName(data.name);
                         authentication.setProfileImageData(data.profileImageData);
                         authentication.setCoverImageData(data.coverImageData);

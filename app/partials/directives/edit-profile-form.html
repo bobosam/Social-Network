@@ -6,7 +6,7 @@
                     <img class="img-thumbnail profile-picture-preview" id="profileImagePreview" ng-src="{{data.profileImageData}}" alt="Select profile photo."><br/>
                 <p class="label label-info">Allowed format: .jpg, Limit: 128kb</p><br/><br/>
                 <input type="file" id="profileImageSelector" ng-show="false"/>
-                <button class="btn btn-default" ng-click="getProfileImage()">Upload</button>
+                <button class="btn btn-primary" ng-click="getProfileImage()">Upload</button>
             </fieldset>
         </div>
 
@@ -45,7 +45,7 @@
                     <img class="img-thumbnail cover-picture-preview" id="coverImagePreview" ng-src="{{data.coverImageData}}" alt="Select cover photo."><br/>
                     <input type="file" id="coverImageSelector" ng-show="false"/>
                 <p class="label label-info">Limit: 1024kb</p><br/><br/>
-                <button class="btn btn-default" ng-click="getCoverImage()">Upload</button>
+                <button class="btn btn-primary" ng-click="getCoverImage()">Upload</button>
             </fieldset>
         </div>
     </div>
@@ -54,7 +54,7 @@
         <div class="col-md-4 pull-right">
             <input type="submit" class="btn btn-primary" value="Save Changes"
                    ng-click="editProfile(data, editProfileForm)"/>
-            <button class="btn btn-default" ng-click="cancelSave()">Cancel</button>
+            <button class="btn btn-danger" ng-click="cancelSave()">Cancel</button>
         </div>
     </div>
 </form>
